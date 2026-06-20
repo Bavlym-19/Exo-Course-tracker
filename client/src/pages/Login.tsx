@@ -57,7 +57,8 @@ export default function Login() {
             </label>
             <Input
               id="code"
-              type="number"
+              type="text"
+              inputMode="numeric"
               placeholder="أدخل كود الدخول الخاص بك"
               value={code}
               onChange={(e) => setCode(e.target.value)}
