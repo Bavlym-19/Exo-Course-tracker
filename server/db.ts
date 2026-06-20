@@ -1,17 +1,19 @@
 import { eq } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/mysql2";
+import { drizzle } from "drizzle-orm/libsql";
+import { createClient } from "@libsql/client";
 import { InsertUser, users, InsertProgressLog, InsertQuizAttempt, InsertScreenshot, progressLogs, quizAttempts, screenshots, students } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
-// Lazily create the drizzle instance so local tooling can run without a DB.
 export async function getDb() {
-  if (!_db && process.env.DATABASE_URL) {
+  if (!_db) {
     try {
-      _db = drizzle(process.env.DATABASE_URL);
+      // إنشاء قاعدة بيانات SQLite محلية في ملف اسمه local.db
+      const client = createClient({ url: "file:local.db" });
+      _db = drizzle(client);
     } catch (error) {
-      console.warn("[Database] Failed to connect:", error);
+      console.warn("[Database] Failed to connect to SQLite:", error);
       _db = null;
     }
   }
@@ -68,7 +70,9 @@ export async function upsertUser(user: InsertUser): Promise<void> {
       updateSet.lastSignedIn = new Date();
     }
 
-    await db.insert(users).values(values).onDuplicateKeyUpdate({
+    // تعديل لتتوافق مع SQLite (تغيير onDuplicateKeyUpdate إلى upsert)
+    await db.insert(users).values(values).onConflictDoUpdate({
+      target: users.openId,
       set: updateSet,
     });
   } catch (error) {
@@ -144,5 +148,3 @@ export async function getStudentScreenshots(studentId: number) {
   if (!db) return [];
   return db.select().from(screenshots).where(eq(screenshots.studentId, studentId));
 }
-
-
