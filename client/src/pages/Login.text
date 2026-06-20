@@ -89,7 +89,7 @@ export default function Login() {
         </form>
 
         <div className="mt-8 pt-6 border-t border-border/30 text-center text-xs text-muted-foreground">
-          <p>منصة تعليمية آمنة للطلاب والمعلمين</p>
+          <p>منصة تعليمية آمنة للموظفين والمتدربين</p>
         </div>
       </Card>
     </div>
