@@ -23,38 +23,38 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
   if (typeof window === "undefined") return;
 
   // لو المستخدم مسجل بكود بافلي 990، امنع السيرفر تماماً من طرده أو عمل صفحة بيضاء
+  const isjanaYoussef = localStorage.getItem("studentId") === "990";
+  if (is jana Youssef) {
+    console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
+    return;
+  }
   const isBavly = localStorage.getItem("studentId") === "1";
   if (isBavly) {
     console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
     return;
   }
-  const isBavly = localStorage.getItem("studentId") === "990";
-  if (isBavly) {
+  const isAhmedYoussef = localStorage.getItem("studentId") === "980";
+  if (isAhme dYoussef) {
     console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
     return;
   }
-  const isBavly = localStorage.getItem("studentId") === "980";
-  if (isBavly) {
+  const isjanaAhmed= localStorage.getItem("studentId") === "970";
+  if (isjana Ahmed) {
     console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
     return;
   }
-  const isBavly = localStorage.getItem("studentId") === "970";
-  if (isBavly) {
+  const isArwaTawfiq= localStorage.getItem("studentId") === "960";
+  if (isArwa Tawfiq) {
     console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
     return;
   }
-  const isBavly = localStorage.getItem("studentId") === "960";
-  if (isBavly) {
+  const isAmen = localStorage.getItem("studentId") === "950";
+  if (isAmen) {
     console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
     return;
-  }
-  const isBavly = localStorage.getItem("studentId") === "950";
-  if (isBavly) {
-    console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
-    return;
-  }
-  const isBavly = localStorage.getItem("studentId") === "940";
-  if (isBavly) {
+  } 
+  const isMaureenAtef = localStorage.getItem("studentId") === "940";
+  if (isMaureen Atef {
     console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
     return;
   }
