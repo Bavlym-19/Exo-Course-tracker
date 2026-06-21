@@ -13,25 +13,5 @@ jobs:
           node-version: 20
       - run: npm install -g pnpm && pnpm install --no-frozen-lockfile
       - run: npx drizzle-kit push
-      # السطر الجديد السحري والأضمن لإدخال البيانات:
-      - run: |
-          npm install mysql2
-          node -e "
-          const mysql = require('mysql2');
-          const conn = mysql.createConnection(process.env.DATABASE_URL);
-          const query = \`
-            INSERT INTO students (id, name, role, isActive) VALUES 
-            ('970', 'Jana Ahmed', 'student', true),
-            ('980', 'Ahmed Youssef', 'student', true),
-            ('960', 'Arwa Tawfiq', 'student', true),
-            ('950', 'Amen', 'student', true),
-            ('940', 'Maureen Atef', 'student', true)
-            ON DUPLICATE KEY UPDATE name=VALUES(name);
-          \`;
-          conn.query(query, (err) => {
-            if (err) { console.error(err); process.exit(1); }
-            else { console.log('All students added successfully!'); conn.end(); }
-          });
-          "
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
