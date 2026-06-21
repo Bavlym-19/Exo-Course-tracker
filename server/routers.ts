@@ -35,6 +35,7 @@ export const appRouter = router({
             id: student.id,
             name: student.name,
             role: student.role,
+            jobTitle: student.jobTitle,
           },
         };
       }),
