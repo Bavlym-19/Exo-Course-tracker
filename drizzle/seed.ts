@@ -14,13 +14,13 @@ async function seed() {
   const db = drizzle(process.env.DATABASE_URL);
 
   const employees = [
-    { id: 1, name: "بافلي", role: "admin" as const, jobTitle: "Admin", level: "Senior Admin" },
-    { id: 980, name: "أحمد يوسف", role: "student" as const, jobTitle: "Back-end Developer", level: "Intermediate" },
-    { id: 960, name: "أروى توفيق", role: "student" as const, jobTitle: "Presentation Specialist", level: "Intermediate" },
-    { id: 970, name: "جنى أحمد", role: "student" as const, jobTitle: "Front-end Developer", level: "Junior" },
-    { id: 990, name: "جنى يوسف", role: "student" as const, jobTitle: "Hardware, Software, Planning & Development", level: "Senior" },
-    { id: 950, name: "أمين", role: "student" as const, jobTitle: "UI/UX & Front-end Developer", level: "Senior" },
-    { id: 940, name: "مورين عاطف", role: "student" as const, jobTitle: "Biomedical Engineering", level: "Junior" },
+    { id: 1, name: "بافلي", role: "admin" as const, jobTitle: "تيم ليدر", level: "Senior Admin" },
+    { id: 990, name: "جنى يوسف", role: "student" as const, jobTitle: "عتاد و تطوير و التخطيط و الجودة", level: "Senior" },
+    { id: 980, name: "أحمد يوسف", role: "student" as const, jobTitle: "باك اند", level: "Intermediate" },
+    { id: 970, name: "جنى أحمد", role: "student" as const, jobTitle: "فروند اند", level: "Junior" },
+    { id: 960, name: "أروى توفيق", role: "student" as const, jobTitle: "برزنتيشن", level: "Intermediate" },
+    { id: 950, name: "أمين", role: "student" as const, jobTitle: "ui/ux و فروند اند", level: "Senior" },
+    { id: 940, name: "مورين عاطف", role: "student" as const, jobTitle: "بايو ميديكال انجنيرينج", level: "Junior" },
   ];
 
   console.log("Seeding employees...");
