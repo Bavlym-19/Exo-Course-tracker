@@ -10,7 +10,7 @@ export default function Home() {
       {/* Navigation */}
       <nav className="bg-card/50 border-b border-border/30 backdrop-blur-sm sticky top-0 z-50">
         <div className="container max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-accent">Exo</h1>
+          <h1 className="text-2xl font-bold text-accent">Exo Corses</h1>
           <Button onClick={() => setLocation("/login")} className="gap-2">
             تسجيل الدخول
           </Button>
