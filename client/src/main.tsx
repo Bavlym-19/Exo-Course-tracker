@@ -24,7 +24,7 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
 
   // لو المستخدم مسجل بكود بافلي 990، امنع السيرفر تماماً من طرده أو عمل صفحة بيضاء
   const isjanaYoussef = localStorage.getItem("studentId") === "990";
-  if (is janaYoussef) {
+  if (isjanaYoussef) {
     console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
     return;
   }
