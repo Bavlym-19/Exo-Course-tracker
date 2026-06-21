@@ -24,7 +24,7 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
 
   // لو المستخدم مسجل بكود بافلي 990، امنع السيرفر تماماً من طرده أو عمل صفحة بيضاء
   const isjanaYoussef = localStorage.getItem("studentId") === "990";
-  if (is jana Youssef) {
+  if (is janaYoussef) {
     console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
     return;
   }
@@ -34,17 +34,17 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
     return;
   }
   const isAhmedYoussef = localStorage.getItem("studentId") === "980";
-  if (isAhme dYoussef) {
+  if (isAhmedYoussef) {
     console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
     return;
   }
   const isjanaAhmed= localStorage.getItem("studentId") === "970";
-  if (isjana Ahmed) {
+  if (isjanaAhmed) {
     console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
     return;
   }
   const isArwaTawfiq= localStorage.getItem("studentId") === "960";
-  if (isArwa Tawfiq) {
+  if (isArwaTawfiq) {
     console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
     return;
   }
@@ -54,7 +54,7 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
     return;
   } 
   const isMaureenAtef = localStorage.getItem("studentId") === "940";
-  if (isMaureen Atef {
+  if (isMaureenAtef) {
     console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
     return;
   }
