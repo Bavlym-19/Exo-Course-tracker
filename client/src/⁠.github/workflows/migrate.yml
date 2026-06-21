@@ -1,0 +1,17 @@
+name: DB Migration
+on:
+  push:
+    branches: [ main, master ] # أو اسم البرانش بتاعك
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install -g pnpm && pnpm install --no-frozen-lockfile
+      - run: npx drizzle-kit push
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
