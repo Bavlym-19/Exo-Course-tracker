@@ -19,23 +19,31 @@ const queryClient = new QueryClient({
 });
 
 const redirectToLoginIfUnauthorized = (error: unknown) => {
-  if (!(error instanceof TRPCClientError)) return;
   if (typeof window === "undefined") return;
 
   // قائمة بكل الأكواد المسموح لها بالتخطي والدخول فوراً
   const allowedBypassIds = ["1", "990", "980", "970", "960", "950", "940"];
-  const currentStudentId = localStorage.getItem("studentId");
+  
+  // بنجيب الكود من الـ localStorage بأمان تماماً
+  const currentStudentId = window.localStorage ? localStorage.getItem("studentId") : null;
 
+  // لو المستخدم معاه كود من الأكواد دي، بنعمل تخطي لأي خطأ فوراً ومستحيل يطرد أو يبيض الصفحة
   if (currentStudentId && allowedBypassIds.includes(currentStudentId)) {
-    console.log(`[Bypass] Student ${currentStudentId} is authenticated. Ignoring server error.`);
+    console.log(`[Bypass] Student ${currentStudentId} is authenticated.`);
     return;
   }
 
-  const isUnauthorized = error.message === UNAUTHED_ERR_MSG;
+  // تشيك أمان بسيط عشان نضمن إن الكود ميكسرش الصفحة لو الـ error مش جاي سليم
+  const errorMessage = error && typeof error === "object" && "message" in error 
+    ? (error as any).message 
+    : "";
+
+  const isUnauthorized = errorMessage === UNAUTHED_ERR_MSG;
   if (!isUnauthorized) return;
 
   window.location.href = getLoginUrl();
 };
+
 
 
 queryClient.getQueryCache().subscribe(event => {
