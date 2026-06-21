@@ -1,7 +1,7 @@
 import { trpc } from "@/lib/trpc";
 import { UNAUTHED_ERR_MSG } from '@shared/const';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { httpBatchLink, TRPCClientError } from "@trpc/client";
+import { httpBatchLink } from "@trpc/client";
 import { createRoot } from "react-dom/client";
 import superjson from "superjson";
 import App from "./App";
@@ -21,19 +21,6 @@ const queryClient = new QueryClient({
 const redirectToLoginIfUnauthorized = (error: unknown) => {
   if (typeof window === "undefined") return;
 
-  // قائمة بكل الأكواد المسموح لها بالتخطي والدخول فوراً
-  const allowedBypassIds = ["1", "990", "980", "970", "960", "950", "940"];
-  
-  // بنجيب الكود من الـ localStorage بأمان تماماً
-  const currentStudentId = window.localStorage ? localStorage.getItem("studentId") : null;
-
-  // لو المستخدم معاه كود من الأكواد دي، بنعمل تخطي لأي خطأ فوراً ومستحيل يطرد أو يبيض الصفحة
-  if (currentStudentId && allowedBypassIds.includes(currentStudentId)) {
-    console.log(`[Bypass] Student ${currentStudentId} is authenticated.`);
-    return;
-  }
-
-  // تشيك أمان بسيط عشان نضمن إن الكود ميكسرش الصفحة لو الـ error مش جاي سليم
   const errorMessage = error && typeof error === "object" && "message" in error 
     ? (error as any).message 
     : "";
@@ -43,8 +30,6 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
 
   window.location.href = getLoginUrl();
 };
-
-
 
 queryClient.getQueryCache().subscribe(event => {
   if (event.type === "updated" && event.action.type === "error") {
