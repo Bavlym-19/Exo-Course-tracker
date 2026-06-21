@@ -13,26 +13,25 @@ jobs:
           node-version: 20
       - run: npm install -g pnpm && pnpm install --no-frozen-lockfile
       - run: npx drizzle-kit push
-      # السطر الجديد السحري اللي هيضيف لك كل الأكواد حالاً:
+      # السطر الجديد السحري والأضمن لإدخال البيانات:
       - run: |
+          npm install mysql2
           node -e "
-          const { mysql2 } = require('mysql2');
-          const conn = require('mysql2').createConnection(process.env.DATABASE_URL);
-          const students = [
-            ['970', 'Jana Ahmed', 'student', 1],
-            ['980', 'Ahmed Youssef', 'student', 1],
-            ['960', 'Arwa Tawfiq', 'student', 1],
-            ['950', 'Amen', 'student', 1],
-            ['940', 'Maureen Atef', 'student', 1]
-          ];
-          students.forEach(s => {
-            conn.query('INSERT INTO students (id, name, role, isActive) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE name=name', s, (err) => {
-              if (err) console.error(err);
-              else console.log('Added student:', s[1]);
-            });
+          const mysql = require('mysql2');
+          const conn = mysql.createConnection(process.env.DATABASE_URL);
+          const query = \`
+            INSERT INTO students (id, name, role, isActive) VALUES 
+            ('970', 'Jana Ahmed', 'student', true),
+            ('980', 'Ahmed Youssef', 'student', true),
+            ('960', 'Arwa Tawfiq', 'student', true),
+            ('950', 'Amen', 'student', true),
+            ('940', 'Maureen Atef', 'student', true)
+            ON DUPLICATE KEY UPDATE name=VALUES(name);
+          \`;
+          conn.query(query, (err) => {
+            if (err) { console.error(err); process.exit(1); }
+            else { console.log('All students added successfully!'); conn.end(); }
           });
-          setTimeout(() => conn.end(), 5000);
           "
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
