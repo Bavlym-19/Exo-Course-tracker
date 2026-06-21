@@ -17,6 +17,7 @@ export default function Login() {
       localStorage.setItem("studentId", data.student.id.toString());
       localStorage.setItem("studentName", data.student.name);
       localStorage.setItem("studentRole", data.student.role);
+      localStorage.setItem("studentJobTitle", data.student.jobTitle || "");
       setLocation("/dashboard");
     },
     onError: (err) => {
@@ -33,16 +34,7 @@ export default function Login() {
       return;
     }
 
-    // القفزة السحرية لتخطي السيرفر والداتا بيز لـ بافلي
-    if (code.trim() === "990" || code.trim() === "1") {
-      localStorage.setItem("studentId", "990");
-      localStorage.setItem("studentName", "Bavly Medhat (Admin)");
-      localStorage.setItem("studentRole", "admin");
-      
-      // التوجيه فوراً للوحة التحكم
-      setLocation("/dashboard");
-      return;
-    }
+
 
     const numCode = parseInt(code, 10);
     if (isNaN(numCode)) {
