@@ -22,40 +22,12 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
   if (!(error instanceof TRPCClientError)) return;
   if (typeof window === "undefined") return;
 
-  // لو المستخدم مسجل بكود بافلي 990، امنع السيرفر تماماً من طرده أو عمل صفحة بيضاء
-  const isjanaYoussef = localStorage.getItem("studentId") === "990";
-  if (isjanaYoussef) {
-    console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
-    return;
-  }
-  const isBavly = localStorage.getItem("studentId") === "1";
-  if (isBavly) {
-    console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
-    return;
-  }
-  const isAhmedYoussef = localStorage.getItem("studentId") === "980";
-  if (isAhmedYoussef) {
-    console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
-    return;
-  }
-  const isjanaAhmed= localStorage.getItem("studentId") === "970";
-  if (isjanaAhmed) {
-    console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
-    return;
-  }
-  const isArwaTawfiq= localStorage.getItem("studentId") === "960";
-  if (isArwaTawfiq) {
-    console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
-    return;
-  }
-  const isAmen = localStorage.getItem("studentId") === "950";
-  if (isAmen) {
-    console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
-    return;
-  } 
-  const isMaureenAtef = localStorage.getItem("studentId") === "940";
-  if (isMaureenAtef) {
-    console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
+  // قائمة بكل الأكواد المسموح لها بالتخطي والدخول فوراً
+  const allowedBypassIds = ["1", "990", "980", "970", "960", "950", "940"];
+  const currentStudentId = localStorage.getItem("studentId");
+
+  if (currentStudentId && allowedBypassIds.includes(currentStudentId)) {
+    console.log(`[Bypass] Student ${currentStudentId} is authenticated. Ignoring server error.`);
     return;
   }
 
@@ -64,6 +36,7 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
 
   window.location.href = getLoginUrl();
 };
+
 
 queryClient.getQueryCache().subscribe(event => {
   if (event.type === "updated" && event.action.type === "error") {
