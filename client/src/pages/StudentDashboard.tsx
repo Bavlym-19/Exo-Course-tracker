@@ -68,6 +68,7 @@ export default function StudentDashboard() {
           <div className="flex items-center gap-4">
             <div className="text-right">
               <p className="text-sm font-medium text-foreground">{student?.name}</p>
+              <p className="text-xs text-muted-foreground">{student?.jobTitle}</p>
               <p className="text-xs text-muted-foreground">الرقم: {studentId}</p>
             </div>
             <Button
