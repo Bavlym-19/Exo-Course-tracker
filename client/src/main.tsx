@@ -23,7 +23,37 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
   if (typeof window === "undefined") return;
 
   // لو المستخدم مسجل بكود بافلي 990، امنع السيرفر تماماً من طرده أو عمل صفحة بيضاء
+  const isBavly = localStorage.getItem("studentId") === "1";
+  if (isBavly) {
+    console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
+    return;
+  }
   const isBavly = localStorage.getItem("studentId") === "990";
+  if (isBavly) {
+    console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
+    return;
+  }
+  const isBavly = localStorage.getItem("studentId") === "980";
+  if (isBavly) {
+    console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
+    return;
+  }
+  const isBavly = localStorage.getItem("studentId") === "970";
+  if (isBavly) {
+    console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
+    return;
+  }
+  const isBavly = localStorage.getItem("studentId") === "960";
+  if (isBavly) {
+    console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
+    return;
+  }
+  const isBavly = localStorage.getItem("studentId") === "950";
+  if (isBavly) {
+    console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
+    return;
+  }
+  const isBavly = localStorage.getItem("studentId") === "940";
   if (isBavly) {
     console.log("[Bypass] Bavly is authenticated via localStorage. Ignoring server error.");
     return;
